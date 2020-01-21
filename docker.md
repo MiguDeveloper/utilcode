@@ -80,6 +80,11 @@ docker pull postgres:12-alpine
 docker pull rabbitmq:3.8-management-alpine
 ```
 
+> Para levantar el servicio de Rabbit debemos de levantar dos puertos la parte web y el broker, requiere dar un nombre tambien para relacionarlo e.g desde zipkin
+```
+docker run -p 15672:15672 -p 5672:5672 --name microservicios-rabbitmq38 --network springcloud -d rabbitmq:3.8-management-alpine
+```
+
 > Ejecutar la imagen de mysql: '-e' para setear una variable de entorno, '-d' para correr en background (en silencio! :D)
 ```
 docker run -p 3306:3306 --name microservicios-mysql8 --network springcloud - e MYSQL_ROOT_PASSWORD=sasa -e MYSQL_DATABASE=db_springboot_cloud -d mysql:8
