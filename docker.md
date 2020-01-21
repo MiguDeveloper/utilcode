@@ -85,6 +85,15 @@ docker pull rabbitmq:3.8-management-alpine
 docker run -p 15672:15672 -p 5672:5672 --name microservicios-rabbitmq38 --network springcloud -d rabbitmq:3.8-management-alpine
 ```
 
+> Para levantar Zipkin
+```
+docker run -p 9411:9411 --name zipkin-server --network springcloud -e RABBIT_ADDRESSES=nombreMicroServicioRabbit:5672 -e STORAGE_TYPE=mysql -e MYSQL_USER=zipkin -e MYSQL_PASS=znfmdy -e MYSQL_HOST=nombreDelMicroservicioMysql zipkin-server:v1
+```
+> Para ver los detalles de un contenedor
+```
+docker inspect CONTAINER_ID
+```
+
 > Ejecutar la imagen de mysql: '-e' para setear una variable de entorno, '-d' para correr en background (en silencio! :D)
 ```
 docker run -p 3306:3306 --name microservicios-mysql8 --network springcloud - e MYSQL_ROOT_PASSWORD=sasa -e MYSQL_DATABASE=db_springboot_cloud -d mysql:8
