@@ -53,13 +53,57 @@ docker logs -f CONTAINER_ID
 ```
 docker restart NOMBRE_CONTEINER
 ```
+
 > Para detener un servicio
 ```
 docker stop CONTAINER_ID
 ```
+
+> Si deseamos detener varios instancias con un solo comando
+``` shell
+# Nos permite ver los ID de los contenedores que estan en UP
+docker ps -q
+
+# Detener contenedores: Ahora para detener en grupo haremos lo siguiente
+docker stop $(docker ps -q)
+
+# Eliminar contenedores: Para remover en grupo
+docker rm $(docker ps -aq)
+```
+
+> Para eliminar todas las imagenes
+```
+docker rmi $(docker images -aq)
+```
+
 > Para eliminar una instancia 
 ```
 docker rm CONTAINER_ID
+```
+
+> Mostrar la version de docker-compose: nos sirve para componer contenedores de docker en un solo archivo, configurar nuestro despliegue
+```
+docker-compose --version
+```
+
+> Para ejecutar un docket compose
+```
+docker-compose up
+```
+
+> Para eliminar los contenedores que se estan ejecutando mediante docker-compose
+```
+docker-compose down -v
+```
+
+> Docker-compose: Cuando tenemos dependencias de servicios debemos de ejecutarlos en orden, se usa los names mas no los tags de versiones
+``` shell
+docker-compose up -d config-server
+docker-compose up -d servicio-eureka-server
+docker-compose up -d microservicios-mysql8
+
+# Para ver el log de ejecucion de los comandos anteriores podemos ejecutar
+docker-compose logs -f
 ```
 
 > Para eliminar images
